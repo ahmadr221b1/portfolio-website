@@ -4,8 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const footerYear = document.getElementById('current-year');
   const footerName = document.getElementById('footer-name');
   const videoTriggers = document.querySelectorAll('.video-trigger');
-  const contactForm = document.getElementById('contact-form');
-  const formStatus = document.getElementById('form-status');
+  const navLinks = document.querySelectorAll('.nav-links a');
 
   const sunIcon = `
     <svg class="theme-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -84,56 +83,26 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  if (contactForm) {
-    contactForm.addEventListener('submit', async (event) => {
-      event.preventDefault();
-      if (formStatus) {
-        formStatus.hidden = true;
-        formStatus.classList.remove('is-error');
-      }
-      const submitBtn = contactForm.querySelector('button[type="submit"]');
-      const originalText = submitBtn ? submitBtn.textContent : '';
-      if (submitBtn) {
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Sending...';
-      }
-      const formData = new FormData(contactForm);
-
-      try {
-        const response = await fetch(contactForm.action, {
-          method: 'POST',
-          headers: { Accept: 'application/json' },
-          body: formData,
-        });
-
-        if (!response.ok) {
-          throw new Error('Form submission failed');
+  // Highlight active nav link on scroll
+  const sections = Array.from(document.querySelectorAll('section[id]'));
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        const id = entry.target.getAttribute('id');
+        const link = document.querySelector(`.nav-links a[href="#${id}"]`);
+        if (!link) return;
+        if (entry.isIntersecting) {
+          navLinks.forEach((a) => a.classList.remove('active'));
+          link.classList.add('active');
         }
-
-        contactForm.reset();
-        if (formStatus) {
-          formStatus.textContent = 'Thanks for reaching out! Your message is on its way.';
-          formStatus.classList.remove('is-error');
-          formStatus.hidden = false;
-          setTimeout(() => {
-            formStatus.hidden = true;
-          }, 5000);
-        }
-      } catch (error) {
-        if (formStatus) {
-          formStatus.textContent = 'Something went wrong. Please try again or email me directly at ahmadr221b@gmail.com.';
-          formStatus.classList.add('is-error');
-          formStatus.hidden = false;
-        }
-        console.error(error);
-      } finally {
-        if (submitBtn) {
-          submitBtn.disabled = false;
-          submitBtn.textContent = originalText;
-        }
-      }
-    });
-  }
+      });
+    },
+    {
+      threshold: 0.55,
+      rootMargin: '-10% 0px -50% 0px',
+    }
+  );
+  sections.forEach((section) => observer.observe(section));
 
   // Skills category switching
   const categoryButtons = document.querySelectorAll('.category-btn');
