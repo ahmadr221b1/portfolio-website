@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const footerYear = document.getElementById('current-year');
   const footerName = document.getElementById('footer-name');
   const videoTriggers = document.querySelectorAll('.video-trigger');
+  const formSuccess = document.getElementById('form-success');
 
   const sunIcon = `
     <svg class="theme-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -81,6 +82,15 @@ document.addEventListener('DOMContentLoaded', () => {
       window.open(url, '_blank', 'noopener');
     });
   });
+
+  // Contact form success message
+  const params = new URLSearchParams(window.location.search);
+  if (formSuccess && params.get('form') === 'sent') {
+    formSuccess.hidden = false;
+    // Clean the URL so the message doesn't persist after refresh
+    const newUrl = window.location.origin + window.location.pathname + window.location.hash;
+    window.history.replaceState({}, '', newUrl);
+  }
 
   // Skills category switching
   const categoryButtons = document.querySelectorAll('.category-btn');

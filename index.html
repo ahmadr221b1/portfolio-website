@@ -343,7 +343,12 @@
           </svg>
         </a>
       </div>
-      <form class="contact-form" action="#" method="post" onsubmit="return false;">
+      <form class="contact-form" action="https://formsubmit.co/ahmadr221b@gmail.com" method="POST">
+        <input type="hidden" name="_subject" value="New message from ahmadr.dev" />
+        <input type="hidden" name="_next" value="https://ahmadr.dev/?form=sent#contact" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="text" name="_honey" id="bot-field" tabindex="-1" autocomplete="off" />
+
         <label for="name">Your Name</label>
         <input type="text" id="name" name="name" placeholder="Your name" required />
 
@@ -355,6 +360,7 @@
 
         <button type="submit" class="btn primary">Submit</button>
       </form>
+      <p class="form-status" id="form-success" hidden>Thanks for reaching out! Your message is on its way.</p>
     </section>
 
     <!-- Footer -->
