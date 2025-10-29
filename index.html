@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Portfolio</title>
+    <title>Ridhoy Ahmad</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,6 +16,8 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="alternate icon" type="image/png" href="icons/favicon.png" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body class="light">
@@ -130,9 +132,18 @@
         <div class="card about-card quickfacts-card">
           <h3>Quick Facts</h3>
           <ul class="quick-facts">
-            <li><span>Experience:</span> <strong id="experience-years">8+ years supporting high-volume teams</strong></li>
-            <li><span>Projects:</span> <strong id="projects-count">3 cloud-backed applications</strong></li>
-            <li><span>Focus:</span> <strong id="focus-area">Cloud Support &amp; Backend Automation</strong></li>
+            <li>
+              <span class="fact-label">Experience</span>
+              <span class="fact-value" id="experience-years">8+ years supporting high-volume teams</span>
+            </li>
+            <li>
+              <span class="fact-label">Projects</span>
+              <span class="fact-value" id="projects-count">3 cloud-backed applications</span>
+            </li>
+            <li>
+              <span class="fact-label">Focus</span>
+              <span class="fact-value" id="focus-area">Cloud Support &amp; Backend Automation</span>
+            </li>
           </ul>
         </div>
         <!-- Experience Card -->
@@ -185,7 +196,10 @@
                 AWS re/Start Graduate
               </a>
             </li>
-            <li><i class="fa-solid fa-award"></i> <span>Dean&rsquo;s List &mdash; Georgia State University</span></li>
+            <li class="cert-text">
+              <div class="cert-icon text-icon" aria-hidden="true">🎓</div>
+              <span class="cert-link">Dean&rsquo;s List &mdash; Georgia State University</span>
+            </li>
           </ul>
         </div>
       </div>
