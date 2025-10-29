@@ -343,9 +343,8 @@
           </svg>
         </a>
       </div>
-      <form class="contact-form" action="https://formsubmit.co/ahmadr221b@gmail.com" method="POST">
+      <form class="contact-form" id="contact-form" action="https://formsubmit.co/ajax/ahmadr221b@gmail.com" method="POST" novalidate>
         <input type="hidden" name="_subject" value="New message from ahmadr.dev" />
-        <input type="hidden" name="_next" value="https://ahmadr.dev/?form=sent#contact" />
         <input type="hidden" name="_captcha" value="false" />
         <input type="text" name="_honey" id="bot-field" tabindex="-1" autocomplete="off" />
 
@@ -360,7 +359,7 @@
 
         <button type="submit" class="btn primary">Submit</button>
       </form>
-      <p class="form-status" id="form-success" hidden>Thanks for reaching out! Your message is on its way.</p>
+      <p class="form-status" id="form-status" hidden>Thanks for reaching out! Your message is on its way.</p>
     </section>
 
     <!-- Footer -->

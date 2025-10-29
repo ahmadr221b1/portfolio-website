@@ -4,7 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const footerYear = document.getElementById('current-year');
   const footerName = document.getElementById('footer-name');
   const videoTriggers = document.querySelectorAll('.video-trigger');
-  const formSuccess = document.getElementById('form-success');
+  const contactForm = document.getElementById('contact-form');
+  const formStatus = document.getElementById('form-status');
 
   const sunIcon = `
     <svg class="theme-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -83,13 +84,55 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Contact form success message
-  const params = new URLSearchParams(window.location.search);
-  if (formSuccess && params.get('form') === 'sent') {
-    formSuccess.hidden = false;
-    // Clean the URL so the message doesn't persist after refresh
-    const newUrl = window.location.origin + window.location.pathname + window.location.hash;
-    window.history.replaceState({}, '', newUrl);
+  if (contactForm) {
+    contactForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (formStatus) {
+        formStatus.hidden = true;
+        formStatus.classList.remove('is-error');
+      }
+      const submitBtn = contactForm.querySelector('button[type="submit"]');
+      const originalText = submitBtn ? submitBtn.textContent : '';
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending...';
+      }
+      const formData = new FormData(contactForm);
+
+      try {
+        const response = await fetch(contactForm.action, {
+          method: 'POST',
+          headers: { Accept: 'application/json' },
+          body: formData,
+        });
+
+        if (!response.ok) {
+          throw new Error('Form submission failed');
+        }
+
+        contactForm.reset();
+        if (formStatus) {
+          formStatus.textContent = 'Thanks for reaching out! Your message is on its way.';
+          formStatus.classList.remove('is-error');
+          formStatus.hidden = false;
+          setTimeout(() => {
+            formStatus.hidden = true;
+          }, 5000);
+        }
+      } catch (error) {
+        if (formStatus) {
+          formStatus.textContent = 'Something went wrong. Please try again or email me directly at ahmadr221b@gmail.com.';
+          formStatus.classList.add('is-error');
+          formStatus.hidden = false;
+        }
+        console.error(error);
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalText;
+        }
+      }
+    });
   }
 
   // Skills category switching

@@ -785,6 +785,9 @@ body {
   font-weight: 500;
   color: var(--color-accent);
 }
+.form-status.is-error {
+  color: #ef4444;
+}
 #bot-field {
   position: absolute;
   opacity: 0;
